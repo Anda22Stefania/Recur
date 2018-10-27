@@ -70,6 +70,20 @@ function getIrregularRecurringPurchases(accountId)
   });
 }
 
+function setCustomerBalance(id)
+{
+  $.ajax({
+    type: 'GET',
+    url: "http://localhost:5000/api/customer/" + id,
+    success: function(result) {
+
+    },
+    error: function(result) {
+      console.log(resutlt);
+    }
+  })
+}
+
 // method to take the elements of a vector and add them in the table
 function putElementsIntoTable(elementsArray, tableID)
 {
