@@ -1,8 +1,6 @@
 from flask import Flask, render_template, jsonify
 import json, requests
 
-from requests import Response
-
 app = Flask(__name__)
 
 apiKey = "c4a0166d7cd592202bf2bd0bf909b21b"
@@ -30,14 +28,6 @@ def userInfoRoute(custId):
         return jsonify({
             "code": 500
         })
-
-
-if __name__ == '__main__':
-    app.run()
-
-app = Flask(__name__)
-
-key = "351388794358970b8ed7ec1790b2004a"
 
 @app.route('/')
 def index():
