@@ -81,7 +81,7 @@ function putElementsIntoTable(elementsArray, tableID)
     var rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
     var cell1 = row.insertCell();
-    cell1.innerHTML = elementsArray[index].name;
+    cell1.innerHTML = elementsArray[index].merchant.name;
     var cell2 = row.insertCell();
     cell2.innerHTML = elementsArray[index].amount;
     var cell3 = row.insertCell();

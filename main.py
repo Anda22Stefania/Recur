@@ -44,6 +44,9 @@ def getSubscriptionsForUser(id):
         return jsonify({"status_code: 500"})
     content = json.loads(response.text)
     subscriptions = [s for s in content if s['description'] == "recur"]
+    for s in subscriptions:
+        merchant = getMerchant(s['merchant_id'])
+        s.update({'merchant': merchant})
     return jsonify(subscriptions)
 
 @app.route('/api/irregular/<id>', methods=['GET'])
@@ -55,7 +58,17 @@ def getIrregularRecurringPurchases(id):
         return jsonify({"status_code: 500"})
     content = json.loads(response.text)
     purchases = [p for p in content if p['description'] == "irregular"]
+    for p in purchases:
+        merchant = getMerchant(p['merchant_id'])
+        p.update({'merchant': merchant})
     return jsonify(purchases)
+
+def getMerchant(id):
+    url = "http://api.reimaginebanking.com/merchants/{}?key={}".format(id, apiKey)
+    response = requests.get(url)
+    if response.status_code != 200:
+        return jsonify({"status_code: 500"})
+    return json.loads(response.text)
 
 if __name__ == '__main__':
     app.run(debug=True)
