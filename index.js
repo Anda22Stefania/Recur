@@ -32,7 +32,7 @@ function getAllPurchases(id)
     type: "GET",
     url: url,
     success: function(result){
-      console.log(result);
+      //console.log(result);
       return result;
     },
     error: function(result){
@@ -40,20 +40,36 @@ function getAllPurchases(id)
     }
   });
 }
-
+//Function to get fixed recurring costs
 function getSubscriptions(accountId)
 {
   $.ajax({
-    type: GET,
-    url: "localhost/api/subscriptions/" + accountId,
+    type: 'GET',
+    url: "http://localhost:5000/api/subscriptions/" + accountId,
     success: function(result) {
-      console.log(result);
+      putElementsIntoTable(result, "recurring");
     },
     error: function(result){
       console.log(result);
     }
   });
 }
+//Function to get varying recurring costs
+
+function getIrregularRecurringPurchases(accountId)
+{
+  $.ajax({
+    type: 'GET',
+    url: "http://localhost:5000/api/irregular/" + accountId,
+    success: function(result) {
+      putElementsIntoTable(result, "non-recurring");
+    },
+    error: function(result){
+      console.log(result);
+    }
+  });
+}
+
 // method to take the elements of a vector and add them in the table
 function putElementsIntoTable(elementsArray, tableID)
 {
@@ -61,14 +77,15 @@ function putElementsIntoTable(elementsArray, tableID)
   var table = document.getElementById(tableID);
   for(var index = 0; index < elementsArray.length; index++)
   {
+    console.log(elementsArray[index]);
     var rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
     var cell1 = row.insertCell();
     cell1.innerHTML = elementsArray[index].name;
     var cell2 = row.insertCell();
-    cell2.innerHTML = elementsArray[index].cost;
+    cell2.innerHTML = elementsArray[index].amount;
     var cell3 = row.insertCell();
-    cell3.innerHTML = elementsArray[index].date;
+    cell3.innerHTML = elementsArray[index].purchase_date;
   }
 }
 
@@ -85,5 +102,7 @@ var testVector2 = [{name:"Tesco", cost:12, date:"25.10.2018"},
                    {name:"Subway", cost:2, date:"24-10-2018"}];
 
 // call the putElementsIntoTable method
-putElementsIntoTable(testVector1, "recurring");
-putElementsIntoTable(testVector2, "non-recurring");
+//putElementsIntoTable(testVector1, "recurring");
+//putElementsIntoTable(testVector2, "non-recurring");
+getSubscriptions("5bd46141322fa06b67793ea2");
+getIrregularRecurringPurchases("5bd46141322fa06b67793ea2");
