@@ -54,10 +54,36 @@ function getSubscriptions(accountId)
     }
   });
 }
+// method to take the elements of a vector and add them in the table
+function putElementsIntoTable(elementsArray, tableID)
+{
+  //get the table id
+  var table = document.getElementById(tableID);
+  for(var index = 0; index < elementsArray.length; index++)
+  {
+    var rowCount = table.rows.length;
+    var row = table.insertRow(rowCount);
+    var cell1 = row.insertCell();
+    cell1.innerHTML = elementsArray[index].name;
+    var cell2 = row.insertCell();
+    cell2.innerHTML = elementsArray[index].cost;
+    var cell3 = row.insertCell();
+    cell3.innerHTML = elementsArray[index].date;
+  }
+}
 
-alert(getAllPurchases(id));
-var table = document.getElementById("subscriptions");
-var rowCount = table.rows.length;
-var row = table.insertRow(rowCount);
-var cell1 = row.insertCell();
-cell1.innerHTML = "HI";
+
+// hard coded vctor for recurring table
+var testVector1 = [{name:"Netflix", cost:12, date:"26-11-2018"},
+                   {name:"Amazon Prime", cost:8, date:"15-11-2018"},
+                   {name:"Giffgaff", cost:7.50, date:"10-11-2018"},
+                   {name:"Rent", cost:300, date:"1-11-2018"}];
+// hard coded vctor for non-recurring table
+var testVector2 = [{name:"Tesco", cost:12, date:"25.10.2018"},
+                   {name:"Lidl", cost:6, date:"15-10-2018"},
+                   {name:"Subway", cost:5, date:"20-10-2018"},
+                   {name:"Subway", cost:2, date:"24-10-2018"}];
+
+// call the putElementsIntoTable method
+putElementsIntoTable(testVector1, "recurring");
+putElementsIntoTable(testVector2, "non-recurring");
