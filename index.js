@@ -24,6 +24,7 @@ $.ajax({
   }
 });
 
+<<<<<<< HEAD
 function getAllPurchases(id)
 {
   var url = "http://api.reimaginebanking.com/accounts/" + id + "/purchases?key=351388794358970b8ed7ec1790b2004a";
@@ -61,3 +62,18 @@ var rowCount = table.rows.length;
 var row = table.insertRow(rowCount);
 var cell1 = row.insertCell();
 cell1.innerHTML = "HI";
+=======
+function getCustomerAccounts(id) {
+    var url = "http://api.reimaginebanking.com/customers/" + {id} + "/accounts?key=c4a0166d7cd592202bf2bd0bf909b21b";
+    $.ajax(
+        {
+            type: "GET",
+            url: url,
+            success: function(results){
+                var customerAccounts = result;
+                console.log(customerAccounts);
+            }
+        }
+    )
+}
+>>>>>>> 807d4fe980ac6662eed2c2cc9b028d4288feeaec
