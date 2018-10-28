@@ -18,7 +18,6 @@ function showAccounts()
     type: 'GET',
     url: "http://localhost:5000/api/accounts/" + id,
     success: function(result) {
-      console.log(result);
       addAccountsToList(result);
     },
     error: function(result) {
@@ -72,6 +71,7 @@ function getSubscriptions(accountId)
     type: 'GET',
     url: "http://localhost:5000/api/subscriptions/" + accountId,
     success: function(result) {
+      console.log(result);
       putElementsIntoTable(result, "recurring");
     },
     error: function(result){
@@ -80,14 +80,40 @@ function getSubscriptions(accountId)
   });
 }
 //Function to get varying recurring costs
-
+var irregularPurchases = [];
 function getIrregularRecurringPurchases(accountId)
 {
   $.ajax({
     type: 'GET',
     url: "http://localhost:5000/api/irregular/" + accountId,
     success: function(result) {
+      console.log(result);
+      // populate the table
       putElementsIntoTable(result, "non-recurring");
+      // populate the chart
+      var dataPoints = [];
+      for(var i = 0; i < result.length; i++)
+      {
+        var dataElement = {y: result[i].amount, labels: result[i].merchant.name};
+        dataPoints.push(dataElement);
+      }
+      var chart = new CanvasJS.Chart("chartContainer", {
+      	animationEnabled: true,
+        backgroundColor: "transparent",
+        labelFontColor: "LightSlateGrey",
+      	title: {
+          fontColor: "LightSlateGrey",
+      		text: "Monthly spending chart"
+      	},
+      	data: [{
+      		type: "pie",
+      		startAngle: 240,
+      		yValueFormatString: "\"£\"##0.00",
+      		indexLabel: "{label} {y}",
+      		dataPoints
+      	}]
+      });
+      chart.render();
     },
     error: function(result){
       console.log(result);
@@ -95,16 +121,17 @@ function getIrregularRecurringPurchases(accountId)
   });
 }
 
-function setCustomerBalance(id)
+function setAccountBalance(account_id)
 {
   $.ajax({
     type: 'GET',
-    url: "http://localhost:5000/api/accounts/" + id,
+    url: "http://localhost:5000/api/account/" + account_id,
     success: function(result) {
-      document.getElementById('account_balance').innerHTML = result[0].balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      document.getElementById('account_balance').innerHTML = result.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      //console.log(result.balance);
     },
     error: function(result) {
-      console.log(resutlt);
+      console.log(result);
     }
   });
 }
@@ -149,4 +176,4 @@ var testVector2 = [{name:"Tesco", cost:12, date:"25.10.2018"},
 //setCustomerBalance("5bd4613f322fa06b67793e9e");
 getSubscriptions(accountId);
 getIrregularRecurringPurchases(accountId);
-setCustomerBalance(id);
+setAccountBalance(accountId);

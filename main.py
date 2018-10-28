@@ -1,11 +1,11 @@
 from flask import Flask, render_template, jsonify
-#from flask_cors import CORS
+from flask_cors import CORS
 import json, requests
 
 app = Flask(__name__)
-#CORS(app)
+CORS(app)
 
-apiKey = "c4a0166d7cd592202bf2bd0bf909b21b"
+apiKey = "351388794358970b8ed7ec1790b2004a"
 
 @app.route('/')
 def index():
@@ -25,7 +25,7 @@ def userAccountsRoute(custId):
 
 @app.route('/api/customer/<custId>')
 def userInfoRoute(custId):
-    url = 'http://api.reimaginebanking.com/customer/{}?key={}'.format(custId,apiKey)
+    url = 'http://api.reimaginebanking.com/customer/{}?key={}'.format(custId, apiKey)
     response = requests.get(url)
     if response.status_code == 200:
         data = json.loads(response.text)
@@ -42,33 +42,10 @@ def getSubscriptionsForUser(id):
     if response.status_code != 200:
         return jsonify({"status_code": 500})
     content = json.loads(response.text)
-    merchants = []
-    x = 0
-    while x < len(content):
-        merchants.append(content[x]["merchant_id"])
-        x += 1
-    categories = []
-    x = 0
-    while x < len(merchants):
-        url = "http://api.reimaginebanking.com/merchants/{}?key={}".format(merchants[x], apiKey)
-        if response.status_code != 200:
-            return jsonify({"status_code: 500"})
-        response = requests.get(url)
-        data = json.loads(response.text)
-        categories.append(data["category"])
-        x += 1
-    x = 0
-    subscriptions = []
-    while x < len(merchants):
-        if "utilities" in map(str.lower,categories[x]):
-            subscriptions.append(content[x])
-        elif "streaming" in map(str.lower,categories[x]):
-            subscriptions.append(content[x])
-        elif "transport" in map(str.lower,categories[x]):
-            subscriptions.append(content[x])
-        elif "gas" in map(str.lower,categories[x]):
-            subscriptions.append(content[x])
-        x += 1
+    subscriptions = [s for s in content if s['description'] == "recur"]
+    for s in subscriptions:
+        merchant = getMerchant(s['merchant_id'])
+        s.update({'merchant': merchant})
     return jsonify(subscriptions)
 
 @app.route('/api/irregular/<id>', methods=['GET'])
@@ -78,31 +55,10 @@ def getIrregularRecurringPurchases(id):
     if response.status_code != 200:
         return jsonify({"status_code": 500})
     content = json.loads(response.text)
-    merchants = []
-    x = 0
-    while x < len(content):
-        merchants.append(content[x]["merchant_id"])
-        x += 1
-    categories = []
-    x = 0
-    while x < len(merchants):
-        url = "http://api.reimaginebanking.com/merchants/{}?key={}".format(merchants[x], apiKey)
-        response = requests.get(url)
-        if response.status_code != 200:
-            return jsonify({"status_code: 500"})
-        data = json.loads(response.text)
-        categories.append(data["category"])
-        x += 1
-    x = 0
-    purchases = []
-    while x < len(merchants):
-        if "game" in map(str.lower, categories[x]):
-            purchases.append(content[x])
-        elif "food" in map(str.lower, categories[x]):
-            purchases.append(content[x])
-        elif "entertainment" in map(str.lower, categories[x]):
-            purchases.append(content[x])
-        x += 1
+    purchases = [p for p in content if p['description'] == "irregular"]
+    for p in purchases:
+        merchant = getMerchant(p['merchant_id'])
+        p.update({'merchant': merchant})
     return jsonify(purchases)
 
 def getMerchant(id):
@@ -111,6 +67,15 @@ def getMerchant(id):
     if response.status_code != 200:
         return jsonify({"status_code": 500})
     return json.loads(response.text)
+
+@app.route('/api/account/<id>', methods=['GET'])
+def getAccountById(id):
+    url = 'http://api.reimaginebanking.com/accounts/{}?key={}'.format(id, apiKey)
+    response = requests.get(url)
+    if response.status_code != 200:
+        return jsonify({"status_code": 500})
+    content = json.loads(response.text)
+    return jsonify(content)
 
 if __name__ == '__main__':
     app.run(debug=True)
