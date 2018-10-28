@@ -74,9 +74,10 @@ function setCustomerBalance(id)
 {
   $.ajax({
     type: 'GET',
-    url: "http://localhost:5000/api/customer/" + id,
+    url: "http://localhost:5000/api/accounts/" + id,
     success: function(result) {
-
+      console.log(result);
+      document.getElementById("customer-balance").innerHTML = result[0].balance;
     },
     error: function(result) {
       console.log(resutlt);
@@ -91,15 +92,15 @@ function putElementsIntoTable(elementsArray, tableID)
   var table = document.getElementById(tableID);
   for(var index = 0; index < elementsArray.length; index++)
   {
-    console.log(elementsArray[index]);
+    //console.log(elementsArray[index]);
     var rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
     var cell1 = row.insertCell();
-    cell1.innerHTML = elementsArray[index].merchant.name;
+    cell1.innerHTML = elementsArray[index].name;//merchant.name;
     var cell2 = row.insertCell();
-    cell2.innerHTML = elementsArray[index].amount;
+    cell2.innerHTML = elementsArray[index].cost;//amount;
     var cell3 = row.insertCell();
-    cell3.innerHTML = elementsArray[index].purchase_date;
+    cell3.innerHTML = elementsArray[index].date;//purchase_date;
   }
 }
 
@@ -116,7 +117,7 @@ var testVector2 = [{name:"Tesco", cost:12, date:"25.10.2018"},
                    {name:"Subway", cost:2, date:"24-10-2018"}];
 
 // call the putElementsIntoTable method
-//putElementsIntoTable(testVector1, "recurring");
-//putElementsIntoTable(testVector2, "non-recurring");
-getSubscriptions("5bd46141322fa06b67793ea2");
-getIrregularRecurringPurchases("5bd46141322fa06b67793ea2");
+putElementsIntoTable(testVector1, "recurring");
+putElementsIntoTable(testVector2, "non-recurring");
+//getSubscriptions("5bd46141322fa06b67793ea2");
+//getIrregularRecurringPurchases("5bd46141322fa06b67793ea2");
