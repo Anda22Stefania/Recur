@@ -5,13 +5,12 @@ import json, requests, random, os, time
 
 consMerch = ["utilities","streaming","transport","gas"]
 variMerch = ["food","entertainment","game"]
+apiKey = "c4a0166d7cd592202bf2bd0bf909b21b"
 
 chosenConsMerch = []
 chosenVariMerch = []
 
-# Variable inputs #
-
-apiKey = input("Input API Key:\n")
+apiKey = "c4a0166d7cd592202bf2bd0bf909b21b"
 accountId = input("Input account id:\n")
 noConsMerch = int(input("Input number of desired constant merchants:\n"))
 noVariMerch = int(input("Input number of desired variable merchants:\n"))
@@ -81,6 +80,7 @@ def submitPayment(merchant, date):
     if response.status_code == 201:
         return True
     else:
+        print(response.text)
         return False
 
 ## Program ##
