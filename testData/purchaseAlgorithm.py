@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 import json, requests, random, os, time
 
 # Hardcoded variables #
@@ -10,8 +11,8 @@ chosenVariMerch = []
 
 # Variable inputs #
 
-apiKey = "c4a0166d7cd592202bf2bd0bf909b21b" #input("Input API Key:\n")
-accountId = "5bd44926322fa06b67793e7c" #input("Input account id:\n")
+apiKey = input("Input API Key:\n")
+accountId = input("Input account id:\n")
 noConsMerch = int(input("Input number of desired constant merchants:\n"))
 noVariMerch = int(input("Input number of desired variable merchants:\n"))
 months = int(input("Number of months of purchase history:\n"))
@@ -78,10 +79,8 @@ def submitPayment(merchant, date):
         headers={'content-type': 'application/json'},
     )
     if response.status_code == 201:
-        print("good")
         return True
     else:
-        print("bad")
         return False
 
 ## Program ##
@@ -102,3 +101,17 @@ chooseMerchants(consMerch, noConsMerch, chosenConsMerch)
 
 chooseMerchants(variMerch, noVariMerch, chosenVariMerch)
 
+for x in range(months):
+
+    for y in range(28):
+
+        date = datetime.today() - timedelta(days=((x*28)+y))
+
+        if y == 1:
+
+            for z in range(noConsMerch):
+                print(submitPayment(chosenConsMerch[z - 1], date.strftime('%Y-%m-%d')))
+        else:
+
+            if random.randint(0,100) > random.randint(0,80):
+                print(submitPayment(chosenVariMerch[random.randint(0,noVariMerch - 1)], date.strftime('%Y-%m-%d')))
