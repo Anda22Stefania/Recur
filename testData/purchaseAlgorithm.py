@@ -111,7 +111,8 @@ for x in range(months):
 
             for z in range(noConsMerch):
                 print(submitPayment(chosenConsMerch[z - 1], date.strftime('%Y-%m-%d')))
-        else:
-
-            if random.randint(0,100) > random.randint(0,80):
-                print(submitPayment(chosenVariMerch[random.randint(0,noVariMerch - 1)], date.strftime('%Y-%m-%d')))
+        elif random.randint(0,100) > random.randint(0,85):
+            print(submitPayment(chosenVariMerch[random.randint(0, noVariMerch - 1)], date.strftime('%Y-%m-%d')))
+            print(submitPayment(chosenVariMerch[random.randint(0, noVariMerch - 1)], date.strftime('%Y-%m-%d')))
+        elif random.randint(0,100) > random.randint(0,55):
+            print(submitPayment(chosenVariMerch[random.randint(0, noVariMerch - 1)], date.strftime('%Y-%m-%d')))
