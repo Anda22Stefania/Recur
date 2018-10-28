@@ -72,7 +72,16 @@ function putElementsIntoTable(elementsArray, tableID)
   }
 }
 
-
+function gatherDataForChart(tableID)
+{
+  table=getElementById(tableID);
+  var rows=table.getElementsByTagName("tr");
+  var data=[];
+  data.push(['Name', 'Cost per month']);
+  for(var index=0; index<rows.length; index++)
+    data.push(rows[index].name, rows[index].cost);
+  return data;
+}
 // hard coded vctor for recurring table
 var testVector1 = [{name:"Netflix", cost:12, date:"26-11-2018"},
                    {name:"Amazon Prime", cost:8, date:"15-11-2018"},
