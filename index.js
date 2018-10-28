@@ -70,6 +70,20 @@ function getIrregularRecurringPurchases(accountId)
   });
 }
 
+function setCustomerBalance(id)
+{
+  $.ajax({
+    type: 'GET',
+    url: "http://localhost:5000/api/customer/" + id,
+    success: function(result) {
+
+    },
+    error: function(result) {
+      console.log(resutlt);
+    }
+  })
+}
+
 // method to take the elements of a vector and add them in the table
 function putElementsIntoTable(elementsArray, tableID)
 {
@@ -81,7 +95,7 @@ function putElementsIntoTable(elementsArray, tableID)
     var rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
     var cell1 = row.insertCell();
-    cell1.innerHTML = elementsArray[index].name;
+    cell1.innerHTML = elementsArray[index].merchant.name;
     var cell2 = row.insertCell();
     cell2.innerHTML = elementsArray[index].amount;
     var cell3 = row.insertCell();
