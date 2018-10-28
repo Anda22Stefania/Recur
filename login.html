@@ -45,33 +45,30 @@
               <div class="card">
                 <div class="card-header card-header-primary">
                   <h4 class="card-title">Welcome!</h4>
-                  <p class="card-category">Please provide the following information!</p>
+                  <p class="card-category">Please provide the following information:</p>
                 </div>
                 <div class="card-body">
-                  <form>
-                    <div class="row">
+                  <form action="index.js" method="POST"> 
 
+                    <div class="row">
                       <div class="col-md-3">
                         <div class="form-group">
                           <label class="bmd-label-floating">Full Name</label>
-                          <input type="text" class="form-control">
+                          <input type="text" name="full_name" class="form-control">
                         </div>
                       </div>
-
                     </div>
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
                           <label class="bmd-label-floating">Customer Referance Number</label>
-                          <input type="text" class="form-control">
+                          <input type="text" name="customer_reference_number" class="form-control">
                         </div>
                       </div>
-
                     </div>
-
-
                     <button type="submit" class="btn btn-primary pull-right">Done!</button>
                     <div class="clearfix"></div>
+
                   </form>
                 </div>
               </div>
