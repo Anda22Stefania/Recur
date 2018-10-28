@@ -1,214 +1,82 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>Recur</title>
   <link rel="shortcut icon" href="recur_logo.png" />
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-  <!-- Material Kit CSS -->
+  <!-- CSS Files -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
-  <script>
-window.onload = function() {
-/*var table = document.getElementById("non-recurring")
-var tableLen = table.rows.length
-//var data = {labels:[], cost:[]}
-var dataPoints = [];
-console.log(irregularPurchases);
-for (var i=1; i<tableLen; i++)
-{
-  var dataElement = {y: table.rows[i].cells[1].innerText, label: table.rows[i].cells[0].innerText};
-  dataPoints.push(dataElement);
-}
-
- //console.log(dataPoints);
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-  backgroundColor: "transparent",
-  labelFontColor: "LightSlateGrey",
-	title: {
-    fontColor: "LightSlateGrey",
-		text: "Monthly spending chart"
-	},
-	data: [{
-		type: "pie",
-		startAngle: 240,
-		yValueFormatString: "\"£\"##0.00",
-		indexLabel: "{label} {y}",
-		dataPoints
-	}]
-});
-chart.render();*/
-
-}
-</script>
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="assets/demo/demo.css" rel="stylesheet" />
 </head>
 
 <body class="dark-edition">
   <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="black" data-image="./assets/img/sidebar-2.jpg">
-      <!--
-      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
-      Tip 2: you can also add an image using data-image tag
-  -->
-      <div class="logo">
-        <a href="index.html" class="simple-text logo-normal">
-          Recur
-        </a>
-        <link rel="shortcut icon" href="recur_logo.png" />
-      </div>
-      <div class="sidebar-wrapper">
-        <ul class="nav" id="accounts">
-          <li class="nav-item active  ">
-            <a class="nav-link" href="./index.html?user_id=5bd4613f322fa06b67793e9e">
-            <!--<a class="nav-link" href="javascript:void(0)">-->
-              <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <!-- your sidebar here -->
-        </ul>
-      </div>
-    </div>
     <div class="main-panel">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">Dashboard</a>
+            <a class="navbar-brand" href="javascript:void(0)">RECUR</a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
             <span class="navbar-toggler-icon icon-bar"></span>
             <span class="navbar-toggler-icon icon-bar"></span>
           </button>
-          <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">
-                  <i class="material-icons">notifications</i>
-                  <p class="d-lg-none d-md-block">
-                    Notifications
-                  </p>
-                </a>
-              </li>
-              <!-- your navbar here -->
-            </ul>
-          </div>
+
         </div>
       </nav>
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
-          <!-- your content here -->
           <div class="row">
-            <div class="col-xl-4 col-lg-12">
-              <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-               <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-md-12">
+            <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Fixed Recurring Costs</h4>
+                  <h4 class="card-title">Welcome!</h4>
+                  <p class="card-category">Please provide the following information!</p>
                 </div>
-                <div class="card-body table-responsive">
-                  <table class="table table-hover" id="recurring">
-                    <thead class="text-warning">
-                      <th>Name</th>
-                      <th>Cost (£)</th>
-                      <th>Due Date</th>
-                    </thead>
-                    <tbody>
-                    <!--  <tr>
-                        <td>Netflix</td>
-                        <td>£12</td>
-                        <td>26.11.2018</td>
-                      </tr>
-                      <tr>
-                        <td>Amazon Prime</td>
-                        <td>£8</td>
-                        <td>15.11.2018</td>
-                      </tr>
-                      <tr>
-                        <td>Giffgaff</td>
-                        <td>£7.50</td>
-                        <td>10.11.2018</td>
-                      </tr>
-                      <tr>
-                        <td>Rent</td>
-                        <td>£300</td>
-                        <td>1.11.2018</td>
-                      </tr> -->
-                    </tbody>
-                  </table>
+                <div class="card-body">
+                  <form>
+                    <div class="row">
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Full Name</label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="bmd-label-floating">Customer Referance Number</label>
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary pull-right">Done!</button>
+                    <div class="clearfix"></div>
+                  </form>
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 col-md-12">
-              <div class="card">
-                <div class="card-header card-header-primary">
-                  <h4 class="card-title">Varying Recurring Costs</h4>
-                </div>
-                <div class="card-body table-responsive">
-                  <table class="table table-hover" id="non-recurring">
-                    <thead class="text-warning">
-                      <th>Name</th>
-                      <th>Cost (£)</th>
-                      <th>Payment Date</th>
-                    </thead>
-                    <tbody>
-                      <!--<tr>
-                        <td>Tesco</td>
-                        <td>£12</td>
-                        <td>25.10.2018</td>
-                      </tr>
-                      <tr>
-                        <td>Lidl</td>
-                        <td>£6</td>
-                        <td>15.10.2018</td>
-                      </tr>
-                      <tr>
-                        <td>Subway</td>
-                        <td>£5</td>
-                        <td>20.10.2018</td>
-                      </tr>
-                      <tr>
-                        <td>Poundland</td>
-                        <td>£2</td>
-                        <td>24.10.2018</td>
-                      </tr> -->
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
-              <div class="card card-stats">
-                <div class="card-header card-header-success card-header-icon">
-                  <div class="card-icon">
-                    <i class="material-icons">store</i>
-                  </div>
-                  <p class="card-category">Total</p>
-                  <h3 class="card-title" id="account_balance">34,245</h3>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">date_range</i> Current month
-                  </div>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
@@ -221,39 +89,40 @@ chart.render();*/
                   Creative Tim
                 </a>
               </li>
-            </ul>
+
           </nav>
-          <div class="copyright float-right">
-            &copy;
-            <script>
-              document.write(new Date().getFullYear())
-            </script>, made with <i class="material-icons">favorite</i> by
+          <div class="copyright float-right" id="date">
+            , made with <i class="material-icons">favorite</i> by
             <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
           </div>
-          <!-- your footer here -->
         </div>
       </footer>
+      <script>
+        const x = new Date().getFullYear();
+        let date = document.getElementById('date');
+        date.innerHTML = '&copy; ' + x + date.innerHTML;
+      </script>
     </div>
   </div>
-  <!--   Core JS Files   -->
 
-  <script src="./assets/js/core/jquery.min.js"></script>
-  <script src="./assets/js/core/popper.min.js"></script>
-  <script src="./assets/js/core/bootstrap-material-design.min.js"></script>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap-material-design.min.js"></script>
   <script src="https://unpkg.com/default-passive-events"></script>
-  <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!--  Google Maps Plugin
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+  <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
   <!-- Chartist JS -->
-  <script src="./assets/js/plugins/chartist.min.js"></script>
+  <script src="../assets/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->
-  <script src="./assets/js/plugins/bootstrap-notify.js"></script>
+  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="./assets/js/material-dashboard.js?v=2.1.0"></script>
+  <script src="../assets/js/material-dashboard.js?v=2.1.0"></script>
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-  <script src="./assets/demo/demo.js"></script>
+  <script src="../assets/demo/demo.js"></script>
   <script>
     $(document).ready(function() {
       $().ready(function() {
@@ -416,7 +285,6 @@ chart.render();*/
       });
     });
   </script>
-  <script src="./index.js"></script>
 </body>
 
 </html>
