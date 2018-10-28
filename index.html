@@ -13,6 +13,40 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <script>
+window.onload = function() {
+var table = document.getElementById("non-recurring")
+var tableLen = table.rows.length
+//var data = {labels:[], cost:[]}
+var dataPoints = [];
+
+for (var i=1; i<tableLen; i++)
+{
+  var dataElement = {y: table.rows[i].cells[1].innerText, label: table.rows[i].cells[0].innerText};
+  dataPoints.push(dataElement);
+}
+
+ //console.log(dataPoints);
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+  backgroundColor: "transparent",
+  labelFontColor: "LightSlateGrey",
+	title: {
+    fontColor: "LightSlateGrey",
+		text: "Monthly spending chart"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "\"£\"##0.00",
+		indexLabel: "{label} {y}",
+		dataPoints
+	}]
+});
+chart.render();
+
+}
+</script>
 </head>
 
 <body class="dark-edition">
@@ -30,9 +64,10 @@
         <link rel="shortcut icon" href="recur_logo.png" />
       </div>
       <div class="sidebar-wrapper">
-        <ul class="nav">
+        <ul class="nav" id="accounts">
           <li class="nav-item active  ">
-            <a class="nav-link" href="javascript:void(0)">
+            <a class="nav-link" href="./index.html?user_id=5bd4613f322fa06b67793e9e">
+            <!--<a class="nav-link" href="javascript:void(0)">-->
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
             </a>
@@ -75,21 +110,8 @@
           <!-- your content here -->
           <div class="row">
             <div class="col-xl-4 col-lg-12">
-              <div class="card card-chart">
-                <div class="card-header card-header-success">
-                  <div class="ct-chart" id="dailySalesChart"></div>
-                </div>
-                <div class="card-body">
-                  <h4 class="card-title">Daily Sales</h4>
-                  <p class="card-category">
-                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
-                </div>
-                <div class="card-footer">
-                  <div class="stats">
-                    <i class="material-icons">access_time</i> updated 4 minutes ago
-                  </div>
-                </div>
-              </div>
+              <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+               <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
             </div>
             <div class="col-xl-4 col-lg-12">
               <div class="card card-chart">
@@ -194,7 +216,7 @@
                     <i class="material-icons">store</i>
                   </div>
                   <p class="card-category">Total</p>
-                  <h3 class="card-title">34,245</h3>
+                  <h3 class="card-title" id="account_balance">34,245</h3>
                 </div>
                 <div class="card-footer">
                   <div class="stats">
@@ -238,8 +260,8 @@
   <script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!--  Google Maps Plugin
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
   <!-- Chartist JS -->
   <script src="./assets/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->

@@ -40,7 +40,7 @@ def getSubscriptionsForUser(id):
     url = "http://api.reimaginebanking.com/accounts/{}/purchases?key={}".format(id, apiKey)
     response = requests.get(url)
     if response.status_code != 200:
-        return jsonify({"status_code: 500"})
+        return jsonify({"status_code": 500})
     content = json.loads(response.text)
     merchants = []
     x = 0
@@ -76,7 +76,7 @@ def getIrregularRecurringPurchases(id):
     url = "http://api.reimaginebanking.com/accounts/{}/purchases?key={}".format(id, apiKey)
     response = requests.get(url)
     if response.status_code != 200:
-        return jsonify({"status_code: 500"})
+        return jsonify({"status_code": 500})
     content = json.loads(response.text)
     merchants = []
     x = 0
@@ -104,6 +104,13 @@ def getIrregularRecurringPurchases(id):
             purchases.append(content[x])
         x += 1
     return jsonify(purchases)
+
+def getMerchant(id):
+    url = "http://api.reimaginebanking.com/merchants/{}?key={}".format(id, apiKey)
+    response = requests.get(url)
+    if response.status_code != 200:
+        return jsonify({"status_code": 500})
+    return json.loads(response.text)
 
 if __name__ == '__main__':
     app.run(debug=True)

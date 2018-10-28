@@ -2,27 +2,52 @@
     foo(res.status);
     bar(res.body); //do something
 });*/
-var id = "5bd46141322fa06b67793ea2";
+const urlParams = new URLSearchParams(window.location.search);
+var id = urlParams.get("user_id");
+console.log(id);
+var accountId = urlParams.get("account_id");
+console.log(accountId);
+
+// var id = "5bd4613f322fa06b67793e9e";
 var accounts = [];
 var subscriptions = {};
 
-$.ajax({
-  type: "GET",
-  url: "http://api.reimaginebanking.com/accounts?key=351388794358970b8ed7ec1790b2004a",
-  success: function(result){
-    var accounts = result;
-    //console.log(accounts);
-  }
-});
+function showAccounts()
+{
+  $.ajax({
+    type: 'GET',
+    url: "http://localhost:5000/api/accounts/" + id,
+    success: function(result) {
+      console.log(result);
+      addAccountsToList(result);
+    },
+    error: function(result) {
+      console.log(result);
+    }
+  })
+}
+showAccounts();
 
-
-$.ajax({
-  type: "GET",
-  url: "http://api.reimaginebanking.com/atms?key=351388794358970b8ed7ec1790b2004a",
-  success: function(result){
-    //alert(result.data[1].name);
+function addAccountsToList(accounts)
+{
+  for(var i = 0; i < accounts.length; i++)
+  {
+    var ul = document.getElementById("accounts");
+    var li = document.createElement("li");
+    var reference = document.createElement("a");
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "material-icons");
+    icon.appendChild(document.createTextNode("account_balance"));
+    li.setAttribute("class", "nav-item active"); // added line
+    reference.setAttribute("class", "nav-link");
+    var url = './index.html?user_id=' + id + '&account_id=' + accounts[i]._id;
+    reference.setAttribute("href", url);
+    reference.appendChild(document.createTextNode(accounts[i].nickname));
+    reference.appendChild(icon);
+    li.appendChild(reference);
+    ul.appendChild(li);
   }
-});
+}
 
 function getAllPurchases(id)
 {
@@ -74,14 +99,14 @@ function setCustomerBalance(id)
 {
   $.ajax({
     type: 'GET',
-    url: "http://localhost:5000/api/customer/" + id,
+    url: "http://localhost:5000/api/accounts/" + id,
     success: function(result) {
-
+      document.getElementById('account_balance').innerHTML = result[0].balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     error: function(result) {
       console.log(resutlt);
     }
-  })
+  });
 }
 
 // method to take the elements of a vector and add them in the table
@@ -91,7 +116,6 @@ function putElementsIntoTable(elementsArray, tableID)
   var table = document.getElementById(tableID);
   for(var index = 0; index < elementsArray.length; index++)
   {
-    console.log(elementsArray[index]);
     var rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
     var cell1 = row.insertCell();
@@ -105,6 +129,7 @@ function putElementsIntoTable(elementsArray, tableID)
 
 
 // hard coded vctor for recurring table
+/*
 var testVector1 = [{name:"Netflix", cost:12, date:"26-11-2018"},
                    {name:"Amazon Prime", cost:8, date:"15-11-2018"},
                    {name:"Giffgaff", cost:7.50, date:"10-11-2018"},
@@ -114,9 +139,14 @@ var testVector2 = [{name:"Tesco", cost:12, date:"25.10.2018"},
                    {name:"Lidl", cost:6, date:"15-10-2018"},
                    {name:"Subway", cost:5, date:"20-10-2018"},
                    {name:"Subway", cost:2, date:"24-10-2018"}];
+*/
 
 // call the putElementsIntoTable method
 //putElementsIntoTable(testVector1, "recurring");
 //putElementsIntoTable(testVector2, "non-recurring");
-getSubscriptions("5bd46141322fa06b67793ea2");
-getIrregularRecurringPurchases("5bd46141322fa06b67793ea2");
+//getSubscriptions("5bd46141322fa06b67793ea2");
+//getIrregularRecurringPurchases("5bd46141322fa06b67793ea2");
+//setCustomerBalance("5bd4613f322fa06b67793e9e");
+getSubscriptions(accountId);
+getIrregularRecurringPurchases(accountId);
+setCustomerBalance(id);
