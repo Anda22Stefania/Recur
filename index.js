@@ -92,20 +92,21 @@ function putElementsIntoTable(elementsArray, tableID)
   var table = document.getElementById(tableID);
   for(var index = 0; index < elementsArray.length; index++)
   {
-    //console.log(elementsArray[index]);
+    console.log(elementsArray[index]);
     var rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
     var cell1 = row.insertCell();
-    cell1.innerHTML = elementsArray[index].name;//merchant.name;
+    cell1.innerHTML = elementsArray[index].merchant.name;
     var cell2 = row.insertCell();
-    cell2.innerHTML = elementsArray[index].cost;//amount;
+    cell2.innerHTML = elementsArray[index].amount;
     var cell3 = row.insertCell();
-    cell3.innerHTML = elementsArray[index].date;//purchase_date;
+    cell3.innerHTML = elementsArray[index].purchase_date;
   }
 }
 
 
 // hard coded vctor for recurring table
+/*
 var testVector1 = [{name:"Netflix", cost:12, date:"26-11-2018"},
                    {name:"Amazon Prime", cost:8, date:"15-11-2018"},
                    {name:"Giffgaff", cost:7.50, date:"10-11-2018"},
@@ -115,9 +116,10 @@ var testVector2 = [{name:"Tesco", cost:12, date:"25.10.2018"},
                    {name:"Lidl", cost:6, date:"15-10-2018"},
                    {name:"Subway", cost:5, date:"20-10-2018"},
                    {name:"Subway", cost:2, date:"24-10-2018"}];
+*/
 
 // call the putElementsIntoTable method
-putElementsIntoTable(testVector1, "recurring");
-putElementsIntoTable(testVector2, "non-recurring");
-//getSubscriptions("5bd46141322fa06b67793ea2");
-//getIrregularRecurringPurchases("5bd46141322fa06b67793ea2");
+//putElementsIntoTable(testVector1, "recurring");
+//putElementsIntoTable(testVector2, "non-recurring");
+getSubscriptions("5bd46141322fa06b67793ea2");
+getIrregularRecurringPurchases("5bd46141322fa06b67793ea2");
